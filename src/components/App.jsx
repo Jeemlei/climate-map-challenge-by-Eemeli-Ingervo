@@ -6,11 +6,11 @@ import Sidebar from './Sidebar';
 import { fetchObservationLocations } from '../utils';
 
 const MapContainer = styled(Map)`
-	width: calc(100vw - 300px);
+	width: calc(100vw - 500px);
 	height: 100vh;
 	position: absolute;
 	top: 0px;
-	left: 300px;
+	left: 500px;
 `;
 
 // Ugly hack to fix Leaflet icons with leaflet loaders
@@ -23,7 +23,6 @@ L.Icon.Default.mergeOptions({
 
 function App() {
 	const [observationLocations, setObservationLocations] = useState([]);
-
 	const [selectedLocation, setSelectedLocation] = useState(null);
 
 	useEffect(() => fetchObservationLocations(setObservationLocations), []);
@@ -49,7 +48,7 @@ function App() {
 	);
 
 	return (
-		<div className="App">
+		<div>
 			<Sidebar
 				selectedLocationId={selectedLocation}
 				observationLocations={observationLocations}
