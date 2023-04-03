@@ -8,6 +8,7 @@ const SidebarContainer = styled.div`
 	position: absolute;
 	top: 0px;
 	background-color: #eee;
+	overflow-y: scroll;
 `;
 
 const StyledHeader = styled.h1`

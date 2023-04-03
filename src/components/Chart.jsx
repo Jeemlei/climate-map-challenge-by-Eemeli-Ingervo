@@ -26,7 +26,7 @@ const StyledHeader = styled.h2`
 
 const InfoText = styled.p`
 	margin-top: 0;
-	width: 525px;
+	width: 475px;
 	text-align: center;
 	color: #aaa;
 	font-size: small;
