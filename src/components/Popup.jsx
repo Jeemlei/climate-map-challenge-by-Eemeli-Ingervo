@@ -1,6 +1,7 @@
 import React from 'react';
 import { Popup as LeafletPopup } from 'react-leaflet';
 import styled from 'styled-components';
+import PopupSummary from './PopupSummary';
 
 const WeatherContainer = styled.div`
 	display: flex;
@@ -48,6 +49,25 @@ const Popup = ({ temperatures, percipitation, snow }) => {
 					{latestSnow || latestSnow === 0 ? `${latestSnow}cm` : '-'}
 				</WeatherItem>
 			</WeatherContainer>
+			<h2>Viikon yhteenveto:</h2>
+			<PopupSummary
+				data={temperatures}
+				maxHeader="Lämpötila max:"
+				minHeader="Lämpötila min:"
+				unit="℃"
+			/>
+			<PopupSummary
+				data={percipitation}
+				maxHeader="Sademäärä max:"
+				minHeader="Sademäärä min:"
+				unit="mm"
+			/>
+			<PopupSummary
+				data={snow}
+				maxHeader="Lumen syvyys max:"
+				minHeader="Lumen syvyys min:"
+				unit="cm"
+			/>
 		</LeafletPopup>
 	);
 };
