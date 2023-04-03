@@ -1,4 +1,5 @@
 import React from 'react';
+import moment from 'moment';
 import {
 	Area,
 	AreaChart,
@@ -37,12 +38,8 @@ const Chart = ({ data, header, unit, line, bar, area, color }) => {
 
 	// Parsing measurements time-value pairs
 	const xyValues = data.map(meas => {
-		const isoString = new Date(meas.time).toISOString().split('T');
-		const dateValues = isoString[0].split('-');
 		const valueObject = {
-			name: `${dateValues[2]}.${dateValues[1]}. klo${
-				isoString[1].split(':')[0]
-			}`,
+			name: moment(new Date(meas.time)).format('D.M. [klo]HH'),
 		};
 		// unit is used as y-axis label
 		valueObject[unit] =
