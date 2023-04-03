@@ -39,7 +39,7 @@ const Chart = ({ data, header, unit, line, bar, area, color }) => {
 	// Parsing measurements time-value pairs
 	const xyValues = data.map(meas => {
 		const valueObject = {
-			name: moment(new Date(meas.time)).format('D.M. [klo]HH'),
+			time: moment(new Date(meas.time)).format('D.M. [klo]HH'),
 		};
 		// unit is used as y-axis label
 		valueObject[unit] =
@@ -48,29 +48,30 @@ const Chart = ({ data, header, unit, line, bar, area, color }) => {
 		return valueObject;
 	});
 
+	const chartOptions = (
+		<>
+			<CartesianGrid strokeDasharray="5 5" />
+			<XAxis dataKey="time" />
+			<YAxis />
+			<Tooltip />
+			<Legend verticalAlign="top" height={36} />
+			<Brush />
+		</>
+	);
+
 	return (
 		<div>
 			<StyledHeader>{header}</StyledHeader>
 			{line && (
 				<LineChart width={475} height={300} data={xyValues}>
+					{chartOptions}
 					<Line type="monotone" dataKey={unit} stroke="#8884d8" />
-					<CartesianGrid strokeDasharray="5 5" />
-					<XAxis dataKey="name" />
-					<YAxis />
-					<Tooltip />
-					<Legend verticalAlign="top" height={36} />
-					<Brush />
 				</LineChart>
 			)}
 			{bar && (
 				<BarChart width={475} height={300} data={xyValues}>
+					{chartOptions}
 					<Bar dataKey={unit} fill={color} />
-					<CartesianGrid strokeDasharray="5 5" />
-					<XAxis dataKey="name" />
-					<YAxis />
-					<Tooltip />
-					<Legend verticalAlign="top" height={36} />
-					<Brush />
 				</BarChart>
 			)}
 			{area && (
@@ -81,18 +82,13 @@ const Chart = ({ data, header, unit, line, bar, area, color }) => {
 							<stop offset="95%" stopColor={color} stopOpacity={0} />
 						</linearGradient>
 					</defs>
+					{chartOptions}
 					<Area
 						dataKey={unit}
 						stroke={color}
 						fillOpacity={1}
 						fill="url(#areaColor)"
 					/>
-					<CartesianGrid strokeDasharray="5 5" />
-					<XAxis dataKey="name" />
-					<YAxis />
-					<Tooltip />
-					<Legend verticalAlign="top" height={36} />
-					<Brush />
 				</AreaChart>
 			)}
 			<InfoText>^käytä liukusäädintä aikaikkunan muuttamiseen^</InfoText>
