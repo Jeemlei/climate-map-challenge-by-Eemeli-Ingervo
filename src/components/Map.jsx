@@ -2,6 +2,7 @@ import React from 'react';
 import { Map as LeafletMap, Marker, TileLayer } from 'react-leaflet';
 import L from 'leaflet';
 import styled from 'styled-components';
+import Popup from './Popup';
 
 const MapContainer = styled(LeafletMap)`
 	width: calc(100vw - 500px);
@@ -27,7 +28,7 @@ const selectedIcon = L.icon({
 
 const Map = ({
 	center,
-    zoom,
+	zoom,
 	locations,
 	selectedLocation,
 	setSelectedLocation,
@@ -40,7 +41,7 @@ const Map = ({
                      &copy; <a href="https://carto.com/attributions">CARTO</a>'
 				subdomains="abcd"
 				maxZoom={20}
-                minZoom={3}
+				minZoom={3}
 			/>
 			{locations.map(loc => (
 				<Marker
@@ -48,7 +49,13 @@ const Map = ({
 					key={loc.info.id}
 					icon={selectedLocation === loc.info.id ? selectedIcon : defaultIcon}
 					onClick={() => setSelectedLocation(loc.info.id)}
-				/>
+				>
+					<Popup
+						temperatures={loc.data.t}
+						percipitation={loc.data.r_1h}
+						snow={loc.data.snowdepth}
+					/>
+				</Marker>
 			))}
 		</MapContainer>
 	);
