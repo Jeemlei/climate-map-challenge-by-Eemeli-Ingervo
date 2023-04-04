@@ -48,7 +48,7 @@ const PopupSummary = ({ data, maxHeader, minHeader, unit }) => {
 						{max.value}
 						{unit}
 					</SummaryItem>
-					<SummaryItem>
+					<SummaryItem data-testid='max-time'>
 						{moment(new Date(max.time)).format('D.M. [klo] H')}
 					</SummaryItem>
 				</div>
@@ -61,7 +61,7 @@ const PopupSummary = ({ data, maxHeader, minHeader, unit }) => {
 						{min.value}
 						{unit}
 					</SummaryItem>
-					<SummaryItem>
+					<SummaryItem data-testid='min-time'>
 						{moment(new Date(min.time)).format('D.M. [klo] H')}
 					</SummaryItem>
 				</div>
